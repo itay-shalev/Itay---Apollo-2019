@@ -31,8 +31,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 public class Hardware
@@ -48,12 +46,9 @@ public class Hardware
     HardwareMap hwMap           =  null;
 
     public enum DriveModes{
-        //STRAFE_LEFT,
-        STRAFE_RIGHT,
-        DIAGONAL_RIGHT_FRONT,
-        //DIAGONAL_RIGHT_BACK,
-        DIAGONAL_LEFT_FRONT,
-        //DIAGONAL_LEFT_BACK,
+        STRAFE,
+        DIAGONAL_RIGHT,
+        DIAGONAL_LEFT,
         TURN,
         NORMAL
     }
@@ -84,7 +79,6 @@ public class Hardware
         SetALLMotorPower(0);
 
         // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
         MotorSetMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void SetALLMotorPower (double Power){
@@ -108,27 +102,20 @@ public class Hardware
                 setLeftMotorPower(Power);
                 setRightMotorPower(-Power);
                 break;
-            case DIAGONAL_LEFT_FRONT:
+            case DIAGONAL_LEFT:
                 MotorRightFront.setPower(Power);
                 MotorLeftBack.setPower(Power);
                 break;
-            case DIAGONAL_RIGHT_FRONT:
+            case DIAGONAL_RIGHT:
                 MotorLeftFront.setPower(Power);
                 MotorRightBack.setPower(Power);
                 break;
-            case STRAFE_RIGHT:
+            case STRAFE:
                 MotorLeftBack.setPower(-Power);
                 MotorLeftFront.setPower(Power);
                 MotorRightBack.setPower(Power);
                 MotorRightFront.setPower(-Power);
                 break;
-    /*        case STRAFE_LEFT:
-                MotorLeftBack.setPower(Power);
-                MotorLeftFront.setPower(-Power);
-                MotorRightBack.setPower(-Power);
-                MotorRightFront.setPower(Power);
-                break;
-    */
             case NORMAL:
                 SetALLMotorPower(Power);
                 break;

@@ -32,23 +32,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-
-/**
- * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
- * All device access is managed through the HardwarePushbot class.
- * The code is structured as a LinearOpMode
- *
- * This particular OpMode executes a POV Game style Teleop for a PushBot
- * In this mode the left stick moves the robot FWD and back, the Right stick turns left and right.
- * It raises and lowers the claw using the Gampad Y and A buttons respectively.
- * It also opens and closes the claws slowly using the left and right Bumper buttons.
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
- */
 
 @TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
 @Disabled
@@ -91,13 +74,13 @@ public class Teleop extends LinearOpMode {
                 robot.MotorDriveMode(lefty*mulltiplayer, Hardware.DriveModes.NORMAL);
             }
             else if (leftx != 0.1 && lefty <= 0.1 && rightx <= 0.1 && righty <= 0.1){
-                robot.MotorDriveMode(leftx*mulltiplayer, Hardware.DriveModes.STRAFE_RIGHT);
+                robot.MotorDriveMode(leftx*mulltiplayer, Hardware.DriveModes.STRAFE);
             }
             else if (leftx > 0 && lefty < 0 || leftx < 0 && lefty > 0){
-                    robot.MotorDriveMode(leftx, Hardware.DriveModes.DIAGONAL_LEFT_FRONT);
+                    robot.MotorDriveMode(leftx, Hardware.DriveModes.DIAGONAL_LEFT);
             }
             else if (leftx > 0 && lefty > 0 || leftx < 0 && lefty < 0) {
-                    robot.MotorDriveMode(lefty, Hardware.DriveModes.DIAGONAL_RIGHT_FRONT);
+                    robot.MotorDriveMode(lefty, Hardware.DriveModes.DIAGONAL_RIGHT);
             }
 
             if (rightx > 0){
