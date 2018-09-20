@@ -33,12 +33,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
-@Disabled
+@TeleOp(name="mecanum test", group="Pushbot")
 public class Teleop extends LinearOpMode {
 
     /* Declare OpMode members. */
-    Hardware robot = new Hardware();   // Use a Pushbot's hardwareo
+    //Hardware robot = new Hardware();   // Use a Pushbot's hardwareo
 
     public double mulltiplayer = 0.5;
     double leftx;
@@ -52,10 +51,10 @@ public class Teleop extends LinearOpMode {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
-        robot.init(hardwareMap);
+        //robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Driver");
+        telemetry.addData("Say", "Version 1");
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
@@ -65,27 +64,33 @@ public class Teleop extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            leftx = -gamepad1.left_stick_x;
-            lefty = -gamepad1.left_stick_y;
-            rightx = -gamepad1.right_stick_x;
-            righty = -gamepad1.right_stick_y;
+            leftx = gamepad1.left_stick_x;
+            lefty = gamepad1.left_stick_y;
+            rightx = gamepad1.right_stick_x;
+            righty = gamepad1.right_stick_y;
 
-            if (lefty != 0.1 && leftx <= 0.1 && rightx <=0.1 && righty <= 0.1){
-                robot.MotorDriveMode(lefty*mulltiplayer, Hardware.DriveModes.NORMAL);
+            if (Math.abs(lefty) >= 0.1 && Math.abs(leftx) <= 0.1 && Math.abs(rightx) <=0.1 && Math.abs(righty) <= 0.1){
+                //robot.MotorDriveMode(lefty*mulltiplayer, Hardware.DriveModes.NORMAL);
+                telemetry.addData("Say", "strait");
             }
-            else if (leftx != 0.1 && lefty <= 0.1 && rightx <= 0.1 && righty <= 0.1){
-                robot.MotorDriveMode(leftx*mulltiplayer, Hardware.DriveModes.STRAFE);
+            else if (Math.abs(leftx) >= 0.1 && Math.abs(lefty) <= 0.1 && Math.abs(rightx) <= 0.1 && Math.abs(righty) <= 0.1){
+                //robot.MotorDriveMode(leftx*mulltiplayer, Hardware.DriveModes.STRAFE);
+                telemetry.addData("Say", "Strafe");
             }
             else if (leftx > 0 && lefty < 0 || leftx < 0 && lefty > 0){
-                    robot.MotorDriveMode(leftx, Hardware.DriveModes.DIAGONAL_LEFT);
+                //robot.MotorDriveMode(leftx, Hardware.DriveModes.DIAGONAL_LEFT);
+                telemetry.addData("Say", "Digonal_Left");
             }
-            else if (leftx > 0 && lefty > 0 || leftx < 0 && lefty < 0) {
-                    robot.MotorDriveMode(lefty, Hardware.DriveModes.DIAGONAL_RIGHT);
+            else if (Math.abs(leftx) > 0 && Math.abs(lefty) > 0 || Math.abs(leftx) < 0 && Math.abs(lefty) < 0) {
+                //robot.MotorDriveMode(lefty, Hardware.DriveModes.DIAGONAL_RIGHT);
+                telemetry.addData("Say", "Diagonal_Right");
             }
 
-            if (rightx > 0){
-                robot.MotorDriveMode(rightx, Hardware.DriveModes.TURN);
+            if (Math.abs(rightx) > 0){
+                //robot.MotorDriveMode(rightx, Hardware.DriveModes.TURN);
+                telemetry.addData("Say", "Turn");
             }
+            telemetry.update();
         }
     }
 }
