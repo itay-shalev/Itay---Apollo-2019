@@ -39,7 +39,7 @@ public class Teleop extends LinearOpMode {
     /* Declare OpMode members. */
     //Hardware robot = new Hardware();   // Use a Pushbot's hardwareo
 
-    public double mulltiplayer = 0.5;
+    public double mulltiplieyer = 0.5;
     double leftx;
     double lefty;
     double rightx;

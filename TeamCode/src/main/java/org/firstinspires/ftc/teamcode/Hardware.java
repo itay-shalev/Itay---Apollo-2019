@@ -32,6 +32,15 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+
+import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
+import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
+
 
 public class Hardware
 {
@@ -40,7 +49,12 @@ public class Hardware
     public DcMotor  MotorLeftBack  = null;
     public DcMotor  MotorRightFront   = null;
     public DcMotor  MotorRightBack  = null;
-
+    // Length conversion
+    public static final float mmPerInch        = 25.4f;
+    public static final float mmFTCFieldWidth  = (12*6) * mmPerInch;       // the width of the FTC field (from the center point to the outer panels)
+    public static final float mmTargetHeight   = (6) * mmPerInch;          // the height of the center of the target image above the floor
+    public OpenGLMatrix lastLocation = null;
+    public boolean targetVisible = false;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -52,6 +66,14 @@ public class Hardware
         TURN,
         NORMAL
     }
+
+    //VuForia parameters.
+    public final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
+    public final String VUFORIA_KEY = " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+
+
+
+
 
     /* Constructor */
     public Hardware(){
